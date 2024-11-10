@@ -1,5 +1,6 @@
 package com.vvecon.product_service.service_impl;
 
+import com.vvecon.product_service.enums.CategoryGroup;
 import com.vvecon.product_service.model.Category;
 import com.vvecon.product_service.repository.CategoryRepository;
 import com.vvecon.product_service.service.CategoryService;
@@ -42,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = getCategoryById(id);
         category.setName(updatedCategory.getName());
         category.setDescription(updatedCategory.getDescription());
+        category.setCategoryGroup(updatedCategory.getCategoryGroup());
         return categoryRepository.save(category);
     }
 
@@ -49,5 +51,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> getCategoryByCategoryGroup(CategoryGroup categoryGroup) {
+        return categoryRepository.findByCategoryGroup(categoryGroup);
     }
 }

@@ -1,5 +1,6 @@
 package com.vvecon.product_service.controller;
 
+import com.vvecon.product_service.enums.CategoryGroup;
 import com.vvecon.product_service.model.Category;
 import com.vvecon.product_service.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,11 @@ public class CategoryController {
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/group/{categoryGroup}")
+    public ResponseEntity<List<Category>> getCategoryByCategoryGroup(@PathVariable CategoryGroup categoryGroup) {
+        List<Category> categories = categoryService.getCategoryByCategoryGroup(categoryGroup);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 }

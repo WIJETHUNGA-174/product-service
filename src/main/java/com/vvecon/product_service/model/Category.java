@@ -1,6 +1,7 @@
 package com.vvecon.product_service.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.vvecon.product_service.enums.CategoryGroup;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,9 @@ public class Category {
     private Long id;
     private String name;
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private CategoryGroup categoryGroup;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
